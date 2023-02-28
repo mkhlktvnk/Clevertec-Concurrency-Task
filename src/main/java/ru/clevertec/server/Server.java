@@ -1,6 +1,5 @@
-package ru.clevertec.model.ru.clevertec.server;
+package ru.clevertec.server;
 
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import ru.clevertec.model.Request;
