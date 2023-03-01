@@ -25,7 +25,7 @@ public class Client {
     }
 
     @SneakyThrows
-    private Response sendRequest(ExecutorService executor, Request request, Server server) {
+    public Response sendRequest(ExecutorService executor, Request request, Server server) {
         return executor.submit(() -> server.handleRequest(request)).get();
     }
 }
