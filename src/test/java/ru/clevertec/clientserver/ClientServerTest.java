@@ -1,4 +1,4 @@
-package ru.clevertec.integration.client;
+package ru.clevertec.clientserver;
 
 import org.junit.jupiter.api.Test;
 import ru.clevertec.client.Client;
