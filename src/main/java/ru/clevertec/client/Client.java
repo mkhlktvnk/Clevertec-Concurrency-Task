@@ -16,7 +16,7 @@ public class Client {
     public List<Response> sendAllRequests(List<Request> requests, Server server) {
         ExecutorService executor = Executors.newFixedThreadPool(requests.size());
         List<Future<Response>> futureResponses = requests.stream()
-                .map(request -> sendRequest(executor, request, server))
+                .map(request -> sendRequestAsync(executor, request, server))
                 .toList();
         List<Response> extractedResponses = futureResponses.stream()
                 .map(this::extractValue)
@@ -26,7 +26,7 @@ public class Client {
     }
 
     @SneakyThrows
-    private Future<Response> sendRequest(ExecutorService executor, Request request, Server server) {
+    private Future<Response> sendRequestAsync(ExecutorService executor, Request request, Server server) {
         return executor.submit(() -> server.handleRequest(request));
     }
 
