@@ -6,26 +6,32 @@ import ru.clevertec.model.Request;
 import ru.clevertec.model.Response;
 import ru.clevertec.server.Server;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @NoArgsConstructor(staticName = "getInstance")
 public class Client {
     public List<Response> sendAllRequests(List<Request> requests, Server server) {
-        List<Response> responses = new ArrayList<>();
         ExecutorService executor = Executors.newFixedThreadPool(requests.size());
-        requests.forEach(request -> {
-            var response = sendRequest(executor, request, server);
-            responses.add(response);
-        });
+        List<Future<Response>> futureResponses = requests.stream()
+                .map(request -> sendRequest(executor, request, server))
+                .toList();
+        List<Response> extractedResponses = futureResponses.stream()
+                .map(this::extractValue)
+                .toList();
         executor.shutdown();
-        return responses;
+        return extractedResponses;
     }
 
     @SneakyThrows
-    public Response sendRequest(ExecutorService executor, Request request, Server server) {
-        return executor.submit(() -> server.handleRequest(request)).get();
+    private Future<Response> sendRequest(ExecutorService executor, Request request, Server server) {
+        return executor.submit(() -> server.handleRequest(request));
+    }
+
+    @SneakyThrows
+    private Response extractValue(Future<Response> futureResponse) {
+        return futureResponse.get();
     }
 }
