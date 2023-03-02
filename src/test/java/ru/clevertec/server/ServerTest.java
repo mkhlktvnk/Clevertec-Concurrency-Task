@@ -11,7 +11,7 @@ class ServerTest {
     private final Server server = Server.getInstance();
 
     @Test
-    void handleRequest() {
+    void handleRequestShouldHandleReturnActualValue() {
         Request request = new Request(10, 10);
 
         Response response = server.handleRequest(request);

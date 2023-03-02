@@ -11,12 +11,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ClientServerTest {
+
     private final Server server = Server.getInstance();
 
     private final Client client = Client.getInstance();
 
     @Test
-    void sendAllRequests() {
+    void sendAllRequestsShouldReturnActualNumberOfRequests() {
         List<Request> requests = provideTestRequests();
         List<Response> responses = client.sendAllRequests(requests, server);
 

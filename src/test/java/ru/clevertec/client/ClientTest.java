@@ -23,7 +23,7 @@ class ClientTest {
     private Server server;
 
     @Test
-    void sendAllRequestsShouldGetCorrectResponses() {
+    void sendAllRequestsShouldGetActualResponsesAndCallServer() {
         Response response = new Response(0);
         List<Request> requests = provideRequests();
         doReturn(response).when(server).handleRequest(any(Request.class));
