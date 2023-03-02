@@ -13,12 +13,15 @@ ext {
     lombokVersion = "1.18.26"
     junitVersion = "5.8.1"
     assertjVersion = "3.24.2"
+    mockitoVersion = "5.1.1"
 }
 
 dependencies {
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
+    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "org.assertj:assertj-core:${assertjVersion}"
