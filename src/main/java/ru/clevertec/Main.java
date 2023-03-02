@@ -12,7 +12,10 @@ public class Main {
         Server server = Server.getInstance();
         Client client = Client.getInstance();
         List<Request> requests = provideRequests();
+        long start = System.currentTimeMillis();
         List<Response> responses = client.sendAllRequests(requests, server);
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
         System.out.println(responses);
     }
 
